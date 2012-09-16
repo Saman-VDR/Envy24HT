@@ -32,7 +32,7 @@
 #define MPU401_READ()         dev->InByte(card->iobase + DATA_PORT )
 #define MPU401_WRITE(v)       dev->OutByte(card->iobase + DATA_PORT,v )
 
-enum Model {AUREON_SKY, AUREON_SPACE, PHASE28, REVO51, REVO71, JULIA, PHASE22, AP192, PRODIGY_HD2, CANTATIS};
+enum Model {AUREON_SKY, AUREON_SPACE, PHASE28, REVO51, REVO71, JULIA, MAYA44, PHASE22, AP192, PRODIGY_HD2, CANTATIS};
 extern unsigned long Dirs[];
 
 

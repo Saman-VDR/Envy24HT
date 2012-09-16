@@ -385,7 +385,7 @@ IOReturn Envy24HTAudioDevice::gainChangeHandler(IOService *target, IOAudioContro
 
 IOReturn Envy24HTAudioDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
 {
-    DBGPRINT("Envy24HTAudioDevice[%p]::gainChanged(%p, %ld, %ld)\n", this, gainControl, oldValue, newValue);
+    DBGPRINT("Envy24HTAudioDevice[%p]::gainChanged(%p, %d, %ld)\n", this, gainControl, oldValue, newValue);
     
     if (gainControl) {
         DBGPRINT("\t-> Channel %ld\n", gainControl->getChannelID());

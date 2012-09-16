@@ -791,6 +791,12 @@ int card_init(struct CardData *card)
 									card->Specific.HasSPDIF = true;
 									IOLog("Found ESI Juli@!\n");
                                     break;
+                
+            case SUBVENDOR_MAYA44: card->SubType = MAYA44;
+                                    card->Specific.NumChannels = 2;
+                                    card->Specific.HasSPDIF = true;
+                                    IOLog("Found ESI Maya44!\n");
+                                    break;
             
             case SUBVENDOR_PHASE22:
             case SUBVENDOR_FAME22:
@@ -867,7 +873,7 @@ int card_init(struct CardData *card)
            
        dev->ioWrite8(CCS_ACLINK_CONFIG, CCS_ACLINK_I2S, card->iobase); // I2S in split mode
        
-       if (card->SubType != JULIA)
+       if (card->SubType != JULIA || card->SubType != MAYA44)
            dev->ioWrite8(CCS_I2S_FEATURES, CCS_I2S_VOLMUTE | CCS_I2S_96KHZ | CCS_I2S_24BIT | CCS_I2S_192KHZ, card->iobase);
        
        if (card->SubType == REVO71 || card->SubType == REVO51)
@@ -893,7 +899,7 @@ int card_init(struct CardData *card)
        dev->ioWrite16(CCS_GPIO_DATA, 0x0072, card->iobase);
        dev->ioWrite8(CCS_GPIO_DATA2, 0x00, card->iobase);
        }
-    else if (card->SubType == JULIA) {
+    else if (card->SubType == JULIA || card->SubType == MAYA44) {
        dev->ioWrite16(CCS_GPIO_DATA, 0x3819, card->iobase);
        }
     else if (card->SubType == AP192) {
@@ -1106,6 +1112,54 @@ int card_init(struct CardData *card)
         
         CreateParmsForJulia(card);
     }
+    else if (card->SubType == MAYA44)
+    {
+        dev->ioWrite8(CCS_SYSTEM_CONFIG, 0x78, card->iobase);
+        dev->ioWrite8(CCS_ACLINK_CONFIG, CCS_ACLINK_I2S, card->iobase); // I2S in split mode
+        dev->ioWrite8(CCS_I2S_FEATURES, CCS_I2S_96KHZ | CCS_I2S_24BIT | CCS_I2S_192KHZ, card->iobase);
+        dev->ioWrite8(CCS_SPDIF_CONFIG, CCS_SPDIF_INTEGRATED | CCS_SPDIF_INTERNAL_OUT | CCS_SPDIF_IN_PRESENT | CCS_SPDIF_EXTERNAL_OUT, card->iobase);
+        
+        
+        unsigned char *ptr, reg, data;
+        
+        static unsigned char inits_ak4114[] = {
+            0x00, 0x00, // power down & reset
+    		0x00, 0x0F, // power on
+	    	0x01, 0x70, // I2S
+		    0x02, 0x80, // TX1 output enable
+	    	0x03, 0x49, // 1024 LRCK + transmit data
+		    0x04, 0x00, // no mask
+    		0x05, 0x00, // no mask
+	    	0x0D, 0x41, //
+		    0x0E, 0x02,
+    		0x0F, 0x2C,
+	    	0x10, 0x00,
+		    0x11, 0x00,
+    		0xff, 0xff
+	    };
+        
+        ptr = inits_ak4358;
+		while (*ptr != 0xff) {
+			reg = *ptr++;
+			data = *ptr++;
+			WriteI2C(dev, card, AK4358_ADDR, reg, data);
+            MicroDelay(5);
+		}
+        
+        ptr = inits_ak4114;
+		while (*ptr != 0xff) {
+			reg = *ptr++;
+			data = *ptr++;
+			WriteI2C(dev, card, AK4114_ADDR, reg, data);
+            MicroDelay(100);
+        }
+        
+        dev->ioWrite8(MT_SAMPLERATE, 8, card->mtbase);
+        //dev->ioWrite32(0x2C, 0x300200, card->mtbase); // routes analogue in to analogue out
+        
+        CreateParmsForJulia(card);
+    }
+
     else if (card->SubType == PHASE22)
     {
         
