@@ -26,11 +26,10 @@ Actually worked without a restart.
 
 <h3>Removing driver:</h3>
 
-If you want to remove the driver, you have to unload the kext (twice) and remove the directory where the kext is located. Open the terminal and type (copy/paste from here) the following:
+If you want to remove the driver, you have to unload the kext and remove the directory where the kext is located.<br>
+Open the terminal and type (copy/paste) the following:
 
-sudo kextunload /System/Library/Extensions/Envy24HTPCIAudioDriver.kext > /dev/null
-sudo kextunload /System/Library/Extensions/Envy24HTPCIAudioDriver.kext > /dev/null
-sudo rm -R /System/Library/Extensions/Envy24HTPCIAudioDriver.kext
+sudo kextunload /System/Library/Extensions/Envy24HTPCIAudioDriver.kext > /dev/null && sudo rm -R /System/Library/Extensions/Envy24HTPCIAudioDriver.kext<br>
 
 
 <h3>Disclaimer: </h3>
