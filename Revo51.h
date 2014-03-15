@@ -3,7 +3,7 @@
 
 void Revo51_Init(struct CardData *card);
 
-//#define PHASE88_RW      0x08 // 1 = write
+//#define PHASE88_RW         0x08    /* 1 = write */
 #define REVO51_I2C_DATA    0x40    /* I2C: PT 2258 SDA (on revo51) */
 #define REVO51_I2C_CLOCK   0x80    /* I2C: PT 2258 SCL (on revo51) */
 

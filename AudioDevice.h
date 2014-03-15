@@ -6,9 +6,9 @@
 #include <IOKit/audio/IOAudioDevice.h>
 
 #ifdef DEBUG
-	#define DBGPRINT(msg,...)    IOLog(msg, ##__VA_ARGS__)
+#define DBGPRINT(msg,...)    IOLog(msg, ##__VA_ARGS__)
 #else
-	#define DBGPRINT(msg,...)
+#define DBGPRINT(msg,...)
 #endif
 
 class IOPCIDevice;
@@ -24,12 +24,12 @@ class Envy24HTAudioDevice : public IOAudioDevice
     OSDeclareDefaultStructors(Envy24HTAudioDevice)
     
 	struct CardData *card;
-
+    
     virtual bool	initHardware(IOService *provider);
     virtual bool	createAudioEngine();
     virtual void	free();
-	virtual IOReturn performPowerStateChange(IOAudioDevicePowerState oldPowerState, 
-											 IOAudioDevicePowerState newPowerState, 
+	virtual IOReturn performPowerStateChange(IOAudioDevicePowerState oldPowerState,
+											 IOAudioDevicePowerState newPowerState,
 											 UInt32 *microsecondsUntilComplete);
 	
 	void dumpRegisters();
@@ -39,7 +39,7 @@ class Envy24HTAudioDevice : public IOAudioDevice
     
     static IOReturn outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn outputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue);
-
+    
     static IOReturn gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue);
     

@@ -31,7 +31,7 @@ IOReturn Envy24HTAudioEngine::clipOutputSamples(const void *mixBuf, void *sample
     // Start by casting the void * mix and sample buffers to the appropriate types - float * for the mix buffer
     // and SInt32 * for the sample buffer (because our sample hardware uses signed 32-bit samples)
     floatMixBuf = (float *)mixBuf;
-
+    
     // We calculate the maximum sample index we are going to clip and convert
     // This is an index into the entire sample and mix buffers
     maxSampleIndex = (firstSampleFrame + numSampleFrames) * streamFormat->fNumChannels;
@@ -78,8 +78,8 @@ IOReturn Envy24HTAudioEngine::clipOutputSamples(const void *mixBuf, void *sample
     return kIOReturnSuccess;
 }
 
-// The function convertInputSamples() is responsible for converting from the hardware format 
-// in the input sample buffer to float samples in the destination buffer and scale the samples 
+// The function convertInputSamples() is responsible for converting from the hardware format
+// in the input sample buffer to float samples in the destination buffer and scale the samples
 // to a range of -1.0 to 1.0.  This function is guaranteed not to have the samples wrapped
 // from the end of the buffer to the beginning.
 // This function only needs to be implemented if the device has any input IOAudioStreams
@@ -105,7 +105,7 @@ IOReturn Envy24HTAudioEngine::convertInputSamples(const void *sampleBuf, void *d
     
     // Start by casting the destination buffer to a float *
     floatDestBuf = (float *)destBuf;
-    // Determine the starting point for our input conversion 
+    // Determine the starting point for our input conversion
     inputBuf = &(((SInt32 *)sampleBuf)[firstSampleFrame * streamFormat->fNumChannels]);
     
     // Calculate the number of actual samples to convert
@@ -117,7 +117,7 @@ IOReturn Envy24HTAudioEngine::convertInputSamples(const void *sampleBuf, void *d
     for (i = 0; i < numSamplesLeft; i++) {
         // Fetch the SInt32 input sample
         inputSample = *inputBuf;
-    
+        
         // Scale that sample to a range of -1.0 to 1.0, convert to float and store in the destination buffer
         // at the proper location
         if (inputSample >= 0) {
@@ -130,6 +130,6 @@ IOReturn Envy24HTAudioEngine::convertInputSamples(const void *sampleBuf, void *d
         ++inputBuf;
         ++floatDestBuf;
     }
-
+    
     return kIOReturnSuccess;
 }

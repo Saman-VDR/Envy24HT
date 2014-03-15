@@ -14,6 +14,8 @@
 		089C1680FE841241C02AAC07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		1A224C40FF42367911CA2CB7 /* AudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* AudioDevice.h */; };
 		1A224C41FF42367911CA2CB7 /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A224C3FFF42367911CA2CB7 /* AudioDevice.cpp */; settings = {ATTRIBUTES = (); }; };
+		49A6F9AD18D48D0600F61190 /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A6F9AB18D48D0600F61190 /* misc.h */; };
+		49A6F9B118D4A31800F61190 /* Info-Envy24HTAudioDriver.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49A6F9B018D4A31800F61190 /* Info-Envy24HTAudioDriver.plist */; };
 		844C5ECD1072B3C60064BE19 /* AudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* AudioDevice.h */; };
 		844C5ECE1072B3C60064BE19 /* AudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0117744E00710DAB7F000001 /* AudioEngine.h */; };
 		844C5ECF1072B3C60064BE19 /* DriverData.h in Headers */ = {isa = PBXBuildFile; fileRef = 85B86BE70E92C65600B18780 /* DriverData.h */; };
@@ -48,6 +50,17 @@
 		85CD524D0EE49B66005C51C3 /* prodigy_hifi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85CD524B0EE49B66005C51C3 /* prodigy_hifi.cpp */; };
 		85CD524E0EE49B66005C51C3 /* prodigy_hifi.h in Headers */ = {isa = PBXBuildFile; fileRef = 85CD524C0EE49B66005C51C3 /* prodigy_hifi.h */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		49A6F9B218D4A46F00F61190 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXBundleTarget section */
 		089C1673FE841209C02AAC07 /* Envy24HTAudioDriver */ = {
@@ -143,11 +156,10 @@
 		0B81C263FFB7832611CA28AA /* Envy24HTPCIAudioDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = Envy24HTPCIAudioDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A224C3EFF42367911CA2CB7 /* AudioDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioDevice.h; sourceTree = "<group>"; };
 		1A224C3FFF42367911CA2CB7 /* AudioDevice.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDevice.cpp; sourceTree = "<group>"; };
-		844C5EE91072B3C60064BE19 /* Info-Envy24HTAudioDriver__Upgraded__2-1.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Envy24HTAudioDriver__Upgraded__2-1.plist"; sourceTree = "<group>"; };
+		49A6F9AB18D48D0600F61190 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		49A6F9B018D4A31800F61190 /* Info-Envy24HTAudioDriver.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Envy24HTAudioDriver.plist"; sourceTree = "<group>"; };
 		844C5EEA1072B3C60064BE19 /* Envy24HTPCIAudioDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Envy24HTPCIAudioDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		844C5EF51072B3C60064BE19 /* libAudioFloatLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioFloatLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		847F3C3A107155BF00F6BFF6 /* Info-Envy24HTAudioDriver__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Envy24HTAudioDriver__Upgraded_.plist"; sourceTree = "<group>"; };
-		847F3CC7107156D200F6BFF6 /* Info-Envy24HTAudioDriver__Upgraded__2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Envy24HTAudioDriver__Upgraded__2.plist"; sourceTree = "<group>"; };
 		850BB10C0E92D04E00BD103D /* misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = misc.cpp; sourceTree = "<group>"; };
 		8583CDA50EA7C8A500723E83 /* Revo51.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Revo51.cpp; sourceTree = "<group>"; };
 		8583CDA60EA7C8A500723E83 /* Revo51.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Revo51.h; sourceTree = "<group>"; };
@@ -161,7 +173,6 @@
 		85B86BF30E92C6C600B18780 /* regs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regs.h; sourceTree = "<group>"; };
 		85CD524B0EE49B66005C51C3 /* prodigy_hifi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = prodigy_hifi.cpp; sourceTree = "<group>"; };
 		85CD524C0EE49B66005C51C3 /* prodigy_hifi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prodigy_hifi.h; sourceTree = "<group>"; };
-		FCE7239808C89FB200026E23 /* install.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,13 +212,11 @@
 		089C166AFE841209C02AAC07 /* Envy24HTAudioDriver */ = {
 			isa = PBXGroup;
 			children = (
+				49A6F9B018D4A31800F61190 /* Info-Envy24HTAudioDriver.plist */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 				247142CAFF3F8F9811CA285C /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				00F55081007288EA11FF4F98 /* Kernel.framework */,
-				847F3C3A107155BF00F6BFF6 /* Info-Envy24HTAudioDriver__Upgraded_.plist */,
-				847F3CC7107156D200F6BFF6 /* Info-Envy24HTAudioDriver__Upgraded__2.plist */,
-				844C5EE91072B3C60064BE19 /* Info-Envy24HTAudioDriver__Upgraded__2-1.plist */,
 			);
 			name = Envy24HTAudioDriver;
 			sourceTree = "<group>";
@@ -240,6 +249,7 @@
 				8583CDA50EA7C8A500723E83 /* Revo51.cpp */,
 				8583CDA60EA7C8A500723E83 /* Revo51.h */,
 				850BB10C0E92D04E00BD103D /* misc.cpp */,
+				49A6F9AB18D48D0600F61190 /* misc.h */,
 				85B86BF30E92C6C600B18780 /* regs.h */,
 				85B86BEF0E92C6BB00B18780 /* I2C.cpp */,
 				85B86BF00E92C6BB00B18780 /* I2C.h */,
@@ -247,7 +257,6 @@
 				85B86BEA0E92C6B000B18780 /* ak_codec.cpp */,
 				85B86BEB0E92C6B000B18780 /* ak_codec.h */,
 				85B86BE70E92C65600B18780 /* DriverData.h */,
-				FCE7239808C89FB200026E23 /* install.sh */,
 				1A224C3EFF42367911CA2CB7 /* AudioDevice.h */,
 				1A224C3FFF42367911CA2CB7 /* AudioDevice.cpp */,
 				0117744E00710DAB7F000001 /* AudioEngine.h */,
@@ -287,6 +296,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A6F9AD18D48D0600F61190 /* misc.h in Headers */,
 				844C5ECD1072B3C60064BE19 /* AudioDevice.h in Headers */,
 				844C5ECE1072B3C60064BE19 /* AudioEngine.h in Headers */,
 				844C5ECF1072B3C60064BE19 /* DriverData.h in Headers */,
@@ -341,6 +351,7 @@
 				844C5EE41072B3C60064BE19 /* ShellScript */,
 			);
 			buildRules = (
+				49A6F9B218D4A46F00F61190 /* PBXBuildRule */,
 			);
 			dependencies = (
 				844C5EF91072B3C60064BE19 /* PBXTargetDependency */,
@@ -411,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				844C5ED71072B3C60064BE19 /* InfoPlist.strings in Resources */,
+				49A6F9B118D4A31800F61190 /* Info-Envy24HTAudioDriver.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.sh ${BUILT_PRODUCTS_DIR}";
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\nrm -r /tmp/Envy24HTPCIAudioDriver\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HTPCIAudioDriver\ncd /tmp\nzip -r ${SRCROOT}/Envy24HTPCIAudioDriver.zip Envy24HTPCIAudioDriver";
 		};
 		06AA1267FFB2110C11CA28AA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -482,7 +494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.sh ${BUILT_PRODUCTS_DIR}";
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\nrm -r /tmp/Envy24HTPCIAudioDriver\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HTPCIAudioDriver\ncd /tmp\nzip -r ${SRCROOT}/Envy24HTPCIAudioDriver.zip Envy24HTPCIAudioDriver";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -571,11 +583,12 @@
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-Envy24HTAudioDriver.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/build/Deployment\"",
+					"\"$(SRCROOT)\"",
 				);
 				MODULE_IOKIT = YES;
 				MODULE_NAME = "com.audio-evolution.driver.Envy24HT";
@@ -603,12 +616,12 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Envy24HTAudioDriver__Upgraded__2-1.plist";
+				INFOPLIST_FILE = "Info-Envy24HTAudioDriver.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/build/Deployment\"",
+					"\"$(SRCROOT)\"",
 				);
 				MODULE_IOKIT = YES;
 				MODULE_NAME = "com.audio-evolution.Envy24HTAudio";
@@ -635,12 +648,12 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-Envy24HTAudioDriver__Upgraded__2-1.plist";
+				INFOPLIST_FILE = "Info-Envy24HTAudioDriver.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/build/Deployment\"",
+					"\"$(SRCROOT)\"",
 				);
 				MODULE_IOKIT = YES;
 				MODULE_NAME = com.MyCompany.driver.SamplePCIAudioDriver;

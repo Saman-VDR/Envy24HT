@@ -16,8 +16,8 @@ struct I2C_bit_ops {
 struct I2C {
 	unsigned short flags; // some private data
 	unsigned short addr;
-   
-   struct I2C_bit_ops *bit; // with a pointer, the specific card information can be put in a struct and assigned to this attribute
+    
+    struct I2C_bit_ops *bit; // with a pointer, the specific card information can be put in a struct and assigned to this attribute
 };
 
 

@@ -75,58 +75,58 @@ struct CardSpecific
 struct CardData
 {
     /*** PCI/Card initialization progress *********************************/
-
-   IOPCIDevice  *pci_dev;
-   IOMemoryMap*     iobase;
-   IOMemoryMap*     mtbase;
-   unsigned short		model;
-   unsigned char     chiprev;
-   unsigned int      irq;
-   unsigned long    SavedDir;
-   unsigned short   SavedMask;
-   
-   struct CardSpecific Specific;
-
+    
+    IOPCIDevice  *pci_dev;
+    IOMemoryMap*     iobase;
+    IOMemoryMap*     mtbase;
+    unsigned short		model;
+    unsigned char     chiprev;
+    unsigned int      irq;
+    unsigned long    SavedDir;
+    unsigned short   SavedMask;
+    
+    struct CardSpecific Specific;
+    
     /** TRUE if the Card chip has been initialized */
     BOOL                card_initialized;
     enum Model      SubType;
-
+    
     struct I2C_bit_ops  *bit_ops;
     unsigned int       gpio_dir;
     unsigned int       gpio_data;
     struct I2C        *i2c;
     
     struct Parm        *ParmList;
-
-
+    
+    
     /*** Playback/recording interrupts ***************************************/
     
     /** TRUE when playback is enabled */
     BOOL                is_playing;
-
+    
     /** TRUE when recording is enabled */
     BOOL                is_recording;
-
+    
     /** Analog mixer variables ***********************************************/
-
+    
     /** The currently selected input */
     UWORD               input;
-
+    
     /** The currently selected output */
     UWORD               output;
-
+    
     /** The hardware register value corresponding to monitor_volume */
     UWORD               monitor_volume_bits;
-
+    
     /** The hardware register value corresponding to input_gain */
     UWORD               input_gain_bits;
-
+    
     /** The hardware register value corresponding to output_volume */
     UWORD               output_volume_bits;
-
+    
     /** Saved state for AC97 mike */
     UWORD               ac97_mic;
-
+    
     /** Saved state for AC97 cd */
     UWORD               ac97_cd;
     

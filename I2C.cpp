@@ -10,14 +10,14 @@ static int I2C_bit_probeaddr(struct CardData *card, unsigned short addr);
 struct I2C *AllocI2C(unsigned char addr)
 {
 	struct I2C *device;
-
+    
 	device = (struct I2C *) new I2C;
 	if (device == NULL)
 		return NULL;
-      
+    
 	device->addr = addr;
     device->flags = 0;
-
+    
 	return device;
 }
 
@@ -89,11 +89,11 @@ static int I2C_bit_data(struct CardData *card, int ack)
 // especially, figure 18 (START byte procedure)
 static void I2C_bit_start(struct CardData *card)
 {
-   // chip-specific init
-	I2C_bit_hw_start(card); 
+    // chip-specific init
+	I2C_bit_hw_start(card);
 	
-   // we're gonna write to both
-   I2C_bit_direction(card, 1, 1);
+    // we're gonna write to both
+    I2C_bit_direction(card, 1, 1);
 	I2C_bit_set(card, 1, 1);
 	I2C_bit_set(card, 1, 0);
 	I2C_bit_set(card, 0, 0);
@@ -106,8 +106,8 @@ static void I2C_bit_stop(struct CardData *card)
 	I2C_bit_set(card, 0, 0);
 	I2C_bit_set(card, 1, 0);
 	I2C_bit_set(card, 1, 1);
-   
-   // chip-specific stop
+    
+    // chip-specific stop
 	I2C_bit_hw_stop(card);
 }
 
@@ -124,19 +124,19 @@ static void I2C_bit_send(struct CardData *card, int data)
 static int I2C_bit_ack(struct CardData *card)
 {
 	int ack;
-
-   // figure 7
+    
+    // figure 7
 	I2C_bit_set(card, 0, 1);
 	I2C_bit_set(card, 1, 1);
-   
-   // then read the ack bit
+    
+    // then read the ack bit
 	I2C_bit_direction(card, 1, 0);
 	ack = I2C_bit_data(card, 1);
-   
-   
+    
+    
 	I2C_bit_direction(card, 1, 1);
 	I2C_bit_set(card, 0, 1);
-
+    
 	return ack;
 }
 
@@ -144,14 +144,14 @@ static int I2C_bit_ack(struct CardData *card)
 static int I2C_bit_sendbyte(struct CardData *card, unsigned char data)
 {
 	int i, err;
-
-   // send the byte bit for bit, MSB first
+    
+    // send the byte bit for bit, MSB first
 	for (i = 7; i >= 0; i--)
 		I2C_bit_send(card, (data & (1 << i)));
-   
+    
 	if ((err = I2C_bit_ack(card)) < 0)
 		return err;
-
+    
 	return 0;
 }
 
@@ -160,22 +160,22 @@ static int I2C_bit_readbyte(struct CardData *card, int last)
 {
 	int i;
 	unsigned char data = 0;
-
+    
 	I2C_bit_set(card, 0, 1);
 	I2C_bit_direction(card, 1, 0);
-
+    
 	for (i = 7; i >= 0; i--) {
 		I2C_bit_set(card, 1, 1);
-      
+        
 		if (I2C_bit_data(card, 0))
 			data |= (1 << i);
 		
-      I2C_bit_set(card, 0, 1);
+        I2C_bit_set(card, 0, 1);
    	}
-
+    
 	I2C_bit_direction(card, 1, 1);
 	I2C_bit_send(card, last);
-
+    
 	return data;
 }
 
@@ -183,27 +183,27 @@ static int I2C_bit_readbyte(struct CardData *card, int last)
 static int I2C_bit_sendbytes(struct CardData *card, struct I2C *device, unsigned char *bytes, int count)
 {
 	int err, res = 0;
-
+    
 	I2C_bit_start(card);
-
-   // first send address of the I2C chip we want to reach
+    
+    // first send address of the I2C chip we want to reach
 	if ((err = I2C_bit_sendbyte(card, device->addr << 1)) < 0) {
 		I2C_bit_hw_stop(card);
 		return err;
    	}
 	
-   // then send all consecutive bytes with an 'ack' in between
-   while (count-- > 0) {
+    // then send all consecutive bytes with an 'ack' in between
+    while (count-- > 0) {
 		if ((err = I2C_bit_sendbyte(card, *bytes++)) < 0) {
 			I2C_bit_hw_stop(card);
 			return err;
 	   	}
-	
-   	res++;
-	   }
-      
+        
+        res++;
+    }
+    
 	I2C_bit_stop(card);
-   
+    
 	return res;
 }
 
@@ -211,26 +211,26 @@ static int I2C_bit_sendbytes(struct CardData *card, struct I2C *device, unsigned
 static int I2C_bit_readbytes(struct CardData *card, struct I2C *device, unsigned char *bytes, int count)
 {
 	int err, res = 0;
-
+    
 	I2C_bit_start(card);
 	
-   if ((err = I2C_bit_sendbyte(card, (device->addr << 1) | 1)) < 0) {
+    if ((err = I2C_bit_sendbyte(card, (device->addr << 1) | 1)) < 0) {
 		I2C_bit_hw_stop(card);
 		return err;
-	   }
-      
+    }
+    
 	while (count-- > 0) {
 		if ((err = I2C_bit_readbyte(card, count == 0)) < 0) {
 			I2C_bit_hw_stop(card);
 			return err;
-		   }
-	
-   	*bytes++ = (unsigned char)err;
+        }
+        
+        *bytes++ = (unsigned char)err;
 		res++;
-	   }
-   
+    }
+    
 	I2C_bit_stop(card);
-   
+    
 	return res;
 }
 
@@ -238,11 +238,10 @@ static int I2C_bit_readbytes(struct CardData *card, struct I2C *device, unsigned
 static int I2C_bit_probeaddr(struct CardData *card, unsigned short addr)
 {
 	int err;
-
+    
 	I2C_bit_start(card);
 	err = I2C_bit_sendbyte(card, addr << 1);
 	I2C_bit_stop(card);
-
+    
 	return err;
 }
-

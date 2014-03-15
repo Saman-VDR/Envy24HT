@@ -80,11 +80,11 @@ static int Revo51_GetDataBit(struct CardData *card, int ack)
 
 
 static struct I2C_bit_ops Revo51_bit_ops = {
-Revo51_Start,
-Revo51_Stop,
-Revo51_SetDir_CLK_SDA,
-Revo51_Write_CLK_SDA,
-Revo51_GetDataBit,
+    Revo51_Start,
+    Revo51_Stop,
+    Revo51_SetDir_CLK_SDA,
+    Revo51_Write_CLK_SDA,
+    Revo51_GetDataBit,
 };
 
 
