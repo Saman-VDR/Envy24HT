@@ -864,7 +864,7 @@ int card_init(struct CardData *card)
         
         dev->ioWrite8(CCS_ACLINK_CONFIG, CCS_ACLINK_I2S, card->iobase); // I2S in split mode
         
-        if (card->SubType != JULIA || card->SubType != MAYA44)
+        if (card->SubType != JULIA && card->SubType != MAYA44)
             dev->ioWrite8(CCS_I2S_FEATURES, CCS_I2S_VOLMUTE | CCS_I2S_96KHZ | CCS_I2S_24BIT | CCS_I2S_192KHZ, card->iobase);
         
         if (card->SubType == REVO71 || card->SubType == REVO51)
