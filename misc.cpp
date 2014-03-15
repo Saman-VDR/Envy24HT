@@ -1544,7 +1544,7 @@ static void CreateParmsForRevo71(struct CardData *card)
     p->MindB = (-48 << 16) + 32768;
     p->MaxdB = 0;
     p->ChannelID = kIOAudioControlChannelIDDefaultLeft + 6; 
-    p->Name = "Output 6";
+    p->Name = "Output 7";
     p->ControlID = 6;
     p->Usage = kIOAudioControlUsageOutput;
     p->reg = 0x8;
@@ -1565,7 +1565,7 @@ static void CreateParmsForRevo71(struct CardData *card)
     p->MindB = (-48 << 16) + 32768;
     p->MaxdB = 0;
     p->ChannelID = kIOAudioControlChannelIDDefaultRight + 7; 
-    p->Name = "Output 7";
+    p->Name = "Output 8";
     p->ControlID = 7;
     p->Usage = kIOAudioControlUsageOutput;
     p->reg = 0x9;
@@ -1826,7 +1826,7 @@ static void CreateParmsForAureonSpace(struct CardData *card)
     p->I2C = false;
     p->I2C_codec_addr = 0;
     p->HasMute = true;
-    p->MuteReg =0x14;
+    p->MuteReg = 0x14;
     p->MuteOnVal = 0x1;
     p->MuteOffVal = 0x0;
     p->codec = NULL;
@@ -1841,7 +1841,7 @@ static void CreateParmsForAureonSpace(struct CardData *card)
     p->MaxValue = 0xFF;
     p->MindB = (-35 << 16) + 32768;
     p->MaxdB = 0;
-    p->ChannelID = kIOAudioControlChannelIDDefaultRight; 
+    p->ChannelID = kIOAudioControlChannelIDDefaultRight;
     p->Name = kIOAudioControlChannelNameRight;
     p->ControlID = 1;
     p->Usage = kIOAudioControlUsageOutput;
@@ -1850,9 +1850,135 @@ static void CreateParmsForAureonSpace(struct CardData *card)
     p->I2C = false;
     p->I2C_codec_addr = 0;
     p->HasMute = true;
-    p->MuteReg =0x14;
+    p->MuteReg = 0x14;
     p->MuteOnVal = 0x1;
     p->MuteOffVal = 0x0;
+    p->codec = NULL;
+
+    
+    // third output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultLeft +2;
+    p->Name =  "Output 3";
+    p->ControlID = 2;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0xB;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
+    p->codec = NULL;
+    
+    
+    // fourth output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultRight +2;
+    p->Name =  "Output 4";
+    p->ControlID = 3;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0xC;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
+    p->codec = NULL;
+    
+    
+    // fifth output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultLeft +4;
+    p->Name =  "Output 5";
+    p->ControlID = 4;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0xD;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
+    p->codec = NULL;
+    
+    
+    // sixth output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultRight +4;
+    p->Name =  "Output 6";
+    p->ControlID = 5;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0xE;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
+    p->codec = NULL;
+    
+    
+    // seventh output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultLeft +6;
+    p->Name =  "Output 7";
+    p->ControlID = 6;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0xF;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
+    p->codec = NULL;
+    
+    
+    // eigth output
+    prev = p;
+    p = new Parm;
+    prev->Next = p;
+    p->InitialValue = 0xFF;
+    p->MinValue = 0xB9;
+    p->MaxValue = 0xFF;
+    p->MindB = (-35 << 16) + 32768;
+    p->MaxdB = 0;
+    p->ChannelID = kIOAudioControlChannelIDDefaultRight +6;
+    p->Name =  "Output 8";
+    p->ControlID = 7;
+    p->Usage = kIOAudioControlUsageOutput;
+    p->reg = 0x10;
+    p->reverse = false;
+    p->I2C = false;
+    p->I2C_codec_addr = 0;
+    p->HasMute = false;
     p->codec = NULL;
     
     
@@ -1867,7 +1993,7 @@ static void CreateParmsForAureonSpace(struct CardData *card)
     p->MaxdB = (19 << 16) + 32768;
     p->ChannelID = kIOAudioControlChannelIDDefaultLeft; 
     p->Name = kIOAudioControlChannelNameLeft;
-    p->ControlID = 2;
+    p->ControlID = 8;
     p->Usage = kIOAudioControlUsageInput;
     p->reg = 0x19;
     p->reverse = false;  
@@ -1888,7 +2014,7 @@ static void CreateParmsForAureonSpace(struct CardData *card)
     p->MaxdB = (19 << 16) + 32768;
     p->ChannelID = kIOAudioControlChannelIDDefaultRight; 
     p->Name = kIOAudioControlChannelNameRight;
-    p->ControlID = 3;
+    p->ControlID = 9;
     p->Usage = kIOAudioControlUsageInput;
     p->reg = 0x1A;
     p->reverse = false; 
