@@ -18,8 +18,8 @@ Currently supported cards are:<ul>
 Cards that are not listed are NOT supported!
 
 <h3>Install driver:</h3>
-
-Open Terminal, change directory to the one where you unpacked the zip and type sudo bash install.sh
+Download and unzip Envy24HTPCIAudioDriver.zip
+Click install.command and enter root password, done.
 Actually worked without a restart.
 
 <h3>Removing driver:</h3>
