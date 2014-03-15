@@ -14,7 +14,6 @@
 		089C1680FE841241C02AAC07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		1A224C40FF42367911CA2CB7 /* AudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* AudioDevice.h */; };
 		1A224C41FF42367911CA2CB7 /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A224C3FFF42367911CA2CB7 /* AudioDevice.cpp */; settings = {ATTRIBUTES = (); }; };
-		496E337F18D4B639004687DE /* install.command in Resources */ = {isa = PBXBuildFile; fileRef = 496E337D18D4B639004687DE /* install.command */; };
 		49A6F9AD18D48D0600F61190 /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A6F9AB18D48D0600F61190 /* misc.h */; };
 		844C5ECD1072B3C60064BE19 /* AudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* AudioDevice.h */; };
 		844C5ECE1072B3C60064BE19 /* AudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0117744E00710DAB7F000001 /* AudioEngine.h */; };
@@ -156,7 +155,6 @@
 		0B81C263FFB7832611CA28AA /* Envy24HTPCIAudioDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = Envy24HTPCIAudioDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A224C3EFF42367911CA2CB7 /* AudioDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioDevice.h; sourceTree = "<group>"; };
 		1A224C3FFF42367911CA2CB7 /* AudioDevice.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioDevice.cpp; sourceTree = "<group>"; };
-		496E337D18D4B639004687DE /* install.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.command; sourceTree = "<group>"; };
 		49A6F9AB18D48D0600F61190 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
 		844C5EEA1072B3C60064BE19 /* Envy24HTPCIAudioDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Envy24HTPCIAudioDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		844C5EF51072B3C60064BE19 /* libAudioFloatLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioFloatLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,7 +210,6 @@
 		089C166AFE841209C02AAC07 /* Envy24HTAudioDriver */ = {
 			isa = PBXGroup;
 			children = (
-				496E337D18D4B639004687DE /* install.command */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 				247142CAFF3F8F9811CA285C /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -421,7 +418,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				496E337F18D4B639004687DE /* install.command in Resources */,
 				844C5ED71072B3C60064BE19 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\nrm -r /tmp/Envy24HT_PCIAudioDriver_64bit\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HT_PCIAudioDriver_64bit\ncd /tmp\nzip -r ${SRCROOT}/Envy24HT_PCIAudioDriver_64bit.zip Envy24HT_PCIAudioDriver_64bit";
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\n[ -d /tmp/Envy24HT_PCIAudioDriver_64bit ] && rm -r /tmp/Envy24HT_PCIAudioDriver_64bit\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HT_PCIAudioDriver_64bit\ncd /tmp\nzip -r ${SRCROOT}/Envy24HT_PCIAudioDriver_64bit.zip Envy24HT_PCIAudioDriver_64bit";
 		};
 		06AA1267FFB2110C11CA28AA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -494,7 +490,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\nrm -r /tmp/Envy24HT_PCIAudioDriver_64bit\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HT_PCIAudioDriver_64bit\ncd /tmp\nzip -r ${SRCROOT}/Envy24HT_PCIAudioDriver_64bit.zip Envy24HT_PCIAudioDriver_64bit";
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type d -exec /bin/chmod 0755 {} \\;\nfind \"${BUILT_PRODUCTS_DIR}/Envy24HTPCIAudioDriver.kext\" -type f -exec /bin/chmod 0644 {} \\;\ncp ${SRCROOT}/install.command ${BUILT_PRODUCTS_DIR}\nchmod 0777 ${BUILT_PRODUCTS_DIR}/install.command\n[ -d /tmp/Envy24HT_PCIAudioDriver_64bit ] && rm -r /tmp/Envy24HT_PCIAudioDriver_64bit\ncp -r ${BUILT_PRODUCTS_DIR} /tmp/Envy24HT_PCIAudioDriver_64bit\ncd /tmp\nzip -r ${SRCROOT}/Envy24HT_PCIAudioDriver_64bit.zip Envy24HT_PCIAudioDriver_64bit";
 		};
 /* End PBXShellScriptBuildPhase section */
 
