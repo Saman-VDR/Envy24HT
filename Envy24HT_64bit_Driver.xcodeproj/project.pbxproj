@@ -376,7 +376,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = FCC4E42908B955B400AC9D19 /* Build configuration list for PBXProject "Envy24HT_64bit_Driver" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -689,8 +689,6 @@
 					"-finline",
 					"-fno-keep-inline-functions",
 					"-force_cpusubtype_ALL",
-					"-mlong-branch",
-					"-fcheck-new",
 					"-findirect-virtual-calls",
 					"-static",
 				);
@@ -737,8 +735,6 @@
 					"-finline",
 					"-fno-keep-inline-functions",
 					"-force_cpusubtype_ALL",
-					"-mlong-branch",
-					"-fcheck-new",
 					"-findirect-virtual-calls",
 					"-static",
 				);
@@ -784,8 +780,6 @@
 					"-finline",
 					"-fno-keep-inline-functions",
 					"-force_cpusubtype_ALL",
-					"-mlong-branch",
-					"-fcheck-new",
 					"-findirect-virtual-calls",
 					"-static",
 				);
@@ -1032,10 +1026,6 @@
 		FCC4E42A08B955B400AC9D19 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
 				BUILD_VARIANTS = normal;
 				GCC_MODEL_TUNING = "";
 				GCC_VERSION = "";
@@ -1049,10 +1039,6 @@
 		FCC4E42B08B955B400AC9D19 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
 				GCC_MODEL_TUNING = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
