@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BuildMachineOSBuild</key>
-	<string>13C64</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>Envy24HTPCIAudioDriver</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>com.audio-evolution.driver.Envy24HT</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -18,20 +18,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>0.14.0</string>
-	<key>DTCompiler</key>
-	<string>com.apple.compilers.llvm.clang.1_0</string>
-	<key>DTPlatformBuild</key>
-	<string>5B130a</string>
-	<key>DTPlatformVersion</key>
-	<string>GM</string>
-	<key>DTSDKBuild</key>
-	<string>13C64</string>
-	<key>DTSDKName</key>
-	<string>macosx10.9</string>
-	<key>DTXcode</key>
-	<string>0510</string>
-	<key>DTXcodeBuild</key>
-	<string>5B130a</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>Envy24HTPCIAudioDriver</key>
