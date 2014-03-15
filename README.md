@@ -6,7 +6,7 @@ Forked from http://www.audio-evolution.com/drivers/
 
 Development environment is Xcode 5.1 on OS X 10.9.2 Mavericks
 
-<ul>Currently supported cards are:
+Currently supported cards are:<ul>
 <li>Terratec Aureon 5.1 Sky</li>
 <li>Terratec Aureon 7.1 Space</li>
 <li>Terratec Phase22</li>
