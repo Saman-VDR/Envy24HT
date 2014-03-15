@@ -19,7 +19,9 @@ Cards that are not listed are NOT supported!
 
 <h3>Install driver:</h3>
 Download and unzip Envy24HTPCIAudioDriver.zip
-Click install.command and enter root password, done.
+
+Open Envy24HTPCIAudioDriver, click install.command and enter root password, done.
+
 Actually worked without a restart.
 
 <h3>Removing driver:</h3>
