@@ -298,7 +298,7 @@ static void aureon_spi_write(struct CardData *card, IOMemoryMap *base, unsigned 
     if (card->SubType == PHASE28)
     	SetGPIOMask(dev, base, ~(AUREON_WM_RW|AUREON_WM_DATA|AUREON_WM_CLK|AUREON_WM_CS));
     else
-        SetGPIOMask(dev, base, ~(AUREON_WM_RW|AUREON_WM_DATA|AUREON_WM_CLK|AUREON_WM_CS | AUREON_CS8415_CS));
+        SetGPIOMask(dev, base, ~(AUREON_WM_RW|AUREON_WM_DATA|AUREON_WM_CLK|AUREON_WM_CS|AUREON_CS8415_CS));
     
     SetGPIOMask(dev, base, 0);
     
@@ -343,7 +343,7 @@ unsigned char CS8415_read(IOPCIDevice *dev, IOMemoryMap *base, unsigned char reg
     
 	tmp = GetGPIOData(dev, base);
     
-	SetGPIOMask(dev, base, ~(AUREON_WM_RW|AUREON_WM_DATA|AUREON_WM_CLK|AUREON_WM_CS|AUREON_CS8415_CS | AUREON_CS8415_CDOUT));
+	SetGPIOMask(dev, base, ~(AUREON_WM_RW|AUREON_WM_DATA|AUREON_WM_CLK|AUREON_WM_CS|AUREON_CS8415_CS|AUREON_CS8415_CDOUT));
     tmp |= AUREON_WM_RW;
 	tmp &= ~cs;
 	SetGPIOData(dev, base, tmp); // set CS low
@@ -552,16 +552,15 @@ void wm_put(struct CardData *card, IOMemoryMap *map, unsigned short reg, unsigne
 }
 
 
-/******************************************************************************
- ** DriverData allocation ******************************************************
- ******************************************************************************/
+/*
+ * DriverData allocation
+ */
 
 // This code used to be in _AHIsub_AllocAudio(), but since we're now
 // handling CAMD support too, it needs to be done at driver loading
 // time.
 
-struct CardData*
-AllocDriverData( IOPCIDevice *    dev, struct CardData *card )
+struct CardData* AllocDriverData( IOPCIDevice * dev, struct CardData *card )
 {
     card->SavedMask = 0;
     card->RevoFrontCodec = NULL;
@@ -572,7 +571,7 @@ AllocDriverData( IOPCIDevice *    dev, struct CardData *card )
     
     
     /* Initialize chip */
-    if( card_init( card ) < 0 )
+    if (card_init( card ) < 0)
     {
         return NULL;
     }
@@ -585,24 +584,23 @@ AllocDriverData( IOPCIDevice *    dev, struct CardData *card )
     }
     else
     {
-        card->input          = 0;
+        card->input = 0;
     }
-    card->output         = 0;
+    card->output = 0;
     
     return card;
 }
 
 
-/******************************************************************************
- ** DriverData deallocation ****************************************************
- ******************************************************************************/
+/*
+ * DriverData deallocation
+ */
 
 // And this code used to be in _AHIsub_FreeAudio().
 
-void
-FreeDriverData( struct CardData* card )
+void FreeDriverData( struct CardData* card )
 {
-    if( card != NULL )
+    if (card != NULL)
     {
         if (card->RevoFrontCodec)
         {
@@ -752,47 +750,51 @@ int card_init(struct CardData *card)
         
         switch (subvendor)
         {
-            case SUBVENDOR_AUREON_SKY: card->SubType = AUREON_SKY;
-                IOLog("Found Aureon Sky!\n");
+            case SUBVENDOR_AUREON_SKY:
+                card->SubType = AUREON_SKY;
                 card->Specific.NumChannels = 6;
                 card->Specific.HasSPDIF = true;
+                IOLog("Found Aureon Sky!\n");
                 break;
                 
             case SUBVENDOR_PRODIGY71:
-            case SUBVENDOR_AUREON_SPACE: card->SubType = AUREON_SPACE;
-                IOLog("Found Aureon Space!\n");
+            case SUBVENDOR_AUREON_SPACE:
+                card->SubType = AUREON_SPACE;
                 card->Specific.NumChannels = 8;
                 card->Specific.HasSPDIF = true;
+                IOLog("Found Aureon Space!\n");
                 break;
                 
             case SUBVENDOR_PHASE28:
-			{
 			    card->SubType = PHASE28;
 				card->Specific.NumChannels = 8;
 				card->Specific.HasSPDIF = true;
 			    IOLog("Found Phase28!\n");
                 break;
-		    }
                 
-            case SUBVENDOR_MAUDIO_REVOLUTION51: card->SubType = REVO51;
+            case SUBVENDOR_MAUDIO_REVOLUTION51:
+                card->SubType = REVO51;
                 card->Specific.NumChannels = 6;
                 card->Specific.HasSPDIF = true;
                 IOLog("Found M-Audio Revolution 5.1!\n");
                 break;
                 
-            case SUBVENDOR_MAUDIO_REVOLUTION71: card->SubType = REVO71;
+            case SUBVENDOR_MAUDIO_REVOLUTION71:
+                card->SubType = REVO71;
                 card->Specific.NumChannels = 8;
                 card->Specific.HasSPDIF = true;
                 IOLog("Found M-Audio Revolution 7.1!\n");
                 break;
                 
-            case SUBVENDOR_JULIA: card->SubType = JULIA;
+            case SUBVENDOR_JULIA:
+                card->SubType = JULIA;
                 card->Specific.NumChannels = 2;
                 card->Specific.HasSPDIF = true;
                 IOLog("Found ESI Juli@!\n");
                 break;
                 
-            case SUBVENDOR_MAYA44: card->SubType = MAYA44;
+            case SUBVENDOR_MAYA44:
+                card->SubType = MAYA44;
                 card->Specific.NumChannels = 2;
                 card->Specific.HasSPDIF = true;
                 IOLog("Found ESI Maya44!\n");
@@ -800,48 +802,37 @@ int card_init(struct CardData *card)
                 
             case SUBVENDOR_PHASE22:
             case SUBVENDOR_FAME22:
-			{
 				card->SubType = PHASE22;
 				card->Specific.NumChannels = 2;
 				card->Specific.HasSPDIF = true;
 				IOLog("Found Phase22!\n");
                 break;
-		    }
                 
             case SUBVENDOR_MAUDIO_AP192:
-            {
                 card->SubType = AP192;
 				card->Specific.NumChannels = 2;
 				card->Specific.HasSPDIF = true;
 				IOLog("Found Audiophile 192!\n");
                 break;
-            }
                 
             case VT1724_SUBDEVICE_PRODIGY_HD2:
-            {
                 card->SubType = PRODIGY_HD2;
 				card->Specific.NumChannels = 2;
 				card->Specific.HasSPDIF = true;
 				IOLog("Found AudioTrak Prodigy HD2!\n");
                 break;
-            }
                 
             case SUBVENDOR_CANTATIS:
-            {
                 card->SubType = CANTATIS;
 				card->Specific.NumChannels = 2;
 				card->Specific.HasSPDIF = true;
 				IOLog("Found Cantatis card!\n");
                 break;
                 
-            }
-                
             default:
-			{
 				IOLog("This specific Envy24HT card with subvendor id %x is not supported!\n", subvendor);
 				IOLog("This Envy24HT driver only supports Terratec Aureon Sky, Space, Phase 22 and 28, M-Audio Revolution 5.1/7.1 and ESI Juli@\n");
                 return -1;
-			}
         }
         
         IOLog("subvendor = %x\n", subvendor);
@@ -1064,7 +1055,6 @@ int card_init(struct CardData *card)
         
         CreateParmsForRevo71(card);
     }
-    
     else if (card->SubType == JULIA)
     {
         dev->ioWrite8(CCS_SYSTEM_CONFIG, 0x78, card->iobase);
