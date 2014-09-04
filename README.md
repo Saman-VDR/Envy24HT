@@ -4,7 +4,7 @@ Envy24HT
 OSX driver for several Terratec, M-Audio, ESI, and Audiotrak sound cards.  
 Forked from http://www.audio-evolution.com/drivers/
 
-Current development environment is Xcode 5.1 on OS X 10.9.2 Mavericks
+Current development environment is Xcode 5.1.1 on OS X 10.9.4 Mavericks
  
  
 Currently supported cards are:

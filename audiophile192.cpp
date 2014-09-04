@@ -6,19 +6,19 @@
 
 /*----- SPI bus for CODEC communication. */
 /* */
-#define SPI_CLK 		1       /* Clock output to CODEC's, rising edge clocks data. */
-#define SPI_DIN 		2       /* Data input from the CODEC. */
-#define SPI_DOUT 		3       /* Data output to the CODEC. */
-#define SPI_CS0n 		(1<<4)	/* Selects first chip. */
-#define SPI_CS1n 		(1<<5)	/* Selects second chip. */
+#define SPI_CLK   1            /* Clock output to CODEC's, rising edge clocks data. */
+#define SPI_DIN   2            /* Data input from the CODEC. */
+#define SPI_DOUT  3            /* Data output to the CODEC. */
+#define SPI_CS0n  (1<<4)       /* Selects first chip. */
+#define SPI_CS1n  (1<<5)       /* Selects second chip. */
 
-#define SPI_CC_AK4358   0x02	/* C1:C0 for ak4358. */
-#define SPI_CC_AK4114	0x02	/* C1:C0 for ak4114. */
-#define WRITEMASK       0xffff
+#define SPI_CC_AK4358  0x02    /* C1:C0 for ak4358. */
+#define SPI_CC_AK4114  0x02    /* C1:C0 for ak4114. */
+#define WRITEMASK      0xffff
 /*----- Revolution defines. */
 /* */
-#define ap192_AK4114 (1)        /* iDevice value for AK4114 DIR. */
-#define ap192_AK4358 (2)        /* iDevice value for AK4358 D/A. */
+#define ap192_AK4114 (1)       /* iDevice value for AK4114 DIR. */
+#define ap192_AK4358 (2)       /* iDevice value for AK4358 D/A. */
 
 
 static void GPIOWrite(struct CardData *card, unsigned long pos, unsigned long bit)
@@ -40,20 +40,20 @@ static void GPIOWrite(struct CardData *card, unsigned long pos, unsigned long bi
 void ap192_Assert_CS (struct CardData *card, int iDevice)
 {
     unsigned int dwGPIO;                                /* Current GPIO's. */
-    dwGPIO = GetGPIOData(card->pci_dev, card->iobase);	/* Read current GPIO's. */
+    dwGPIO = GetGPIOData(card->pci_dev, card->iobase);    /* Read current GPIO's. */
     dwGPIO |= (SPI_CS0n | SPI_CS1n);                    /* Reset CS bits. */
-    switch (iDevice)		/* Select CS#. */
+    switch (iDevice)        /* Select CS#. */
     {
         case ap192_AK4358:
             dwGPIO &= ~SPI_CS0n;
-            break;			/* DAC */
+            break;            /* DAC */
         case ap192_AK4114:
             dwGPIO &= ~SPI_CS1n;
-            break;			/* DIG */
+            break;            /* DIG */
         default:
             break;
     }
-    SetGPIOData(card->pci_dev, card->iobase, dwGPIO);	/* Write hardware. */
+    SetGPIOData(card->pci_dev, card->iobase, dwGPIO);    /* Write hardware. */
 }
 
 /*
@@ -66,8 +66,8 @@ void ap192_DeAssert_CS (struct CardData *card)
     SetGPIOData(card->pci_dev, card->iobase, dwGPIO);                   /* Write back to hardware. */
 }
 
-/*#define _delay()	oss_udelay(1) */
-#define _delay()	{}
+/*#define _delay()    oss_udelay(1) */
+#define _delay()    {}
 
 
 /*
@@ -91,17 +91,17 @@ void ap192_WriteSpiAddr (struct CardData *card, int iDevice, unsigned char bReg)
             bHdr = 0;
             break;
     }
-    bHdr = bHdr | 0x20 | (bReg & 0x1F);	/* "write" + address. */
+    bHdr = bHdr | 0x20 | (bReg & 0x1F);    /* "write" + address. */
     /* Write header to SPI. */
     for (bNum = 0; bNum < 8; bNum++)
     {
-        GPIOWrite (card, SPI_CLK, 0);	/* Drop clock low. */
+        GPIOWrite (card, SPI_CLK, 0);    /* Drop clock low. */
         _delay ();
-        GPIOWrite (card, SPI_DOUT, 0x080 & bHdr);	/* Write data bit. */
+        GPIOWrite (card, SPI_DOUT, 0x080 & bHdr);    /* Write data bit. */
         _delay ();
-        GPIOWrite (card, SPI_CLK, 1);	/* Raise clock. */
+        GPIOWrite (card, SPI_CLK, 1);    /* Raise clock. */
         _delay ();
-        bHdr <<= 1;		/* Next bit. */
+        bHdr <<= 1;        /* Next bit. */
     }
 }
 
@@ -114,8 +114,8 @@ void ap192_WriteSpiAddr (struct CardData *card, int iDevice, unsigned char bReg)
 void ap192_WriteSpiReg (struct CardData *card, int iDevice, unsigned char bReg, unsigned char bData)
 {
     unsigned char bNum;
-    GPIOWrite (card, SPI_DOUT, 0);	/* Init SPI signals. */
-    GPIOWrite (card, SPI_CLK, 1);	/* */
+    GPIOWrite (card, SPI_DOUT, 0);    /* Init SPI signals. */
+    GPIOWrite (card, SPI_CLK, 1);    /* */
     /* Drop the chip select low. */
     /* Wait at least 150 nS. */
     ap192_Assert_CS (card, iDevice);
@@ -125,13 +125,13 @@ void ap192_WriteSpiReg (struct CardData *card, int iDevice, unsigned char bReg, 
     /* Write the data byte. */
     for (bNum = 0; bNum < 8; bNum++)
     {
-        GPIOWrite (card, SPI_CLK, 0);	/* Drop clock low. */
+        GPIOWrite (card, SPI_CLK, 0);    /* Drop clock low. */
         _delay ();
-        GPIOWrite (card, SPI_DOUT, 0x080 & bData);	/* Write data bit. */
+        GPIOWrite (card, SPI_DOUT, 0x080 & bData);    /* Write data bit. */
         _delay ();
-        GPIOWrite (card, SPI_CLK, 1);	/* Raise clock. */
+        GPIOWrite (card, SPI_CLK, 1);    /* Raise clock. */
         _delay ();
-        bData <<= 1;		/* Next bit. */
+        bData <<= 1;        /* Next bit. */
     }
     /* De-assert chip selects. */
     ap192_DeAssert_CS (card);
@@ -139,7 +139,7 @@ void ap192_WriteSpiReg (struct CardData *card, int iDevice, unsigned char bReg, 
 }
 
 
-#define GPIO_MUTEn 22		/* Converter mute signal. */
+#define GPIO_MUTEn 22        /* Converter mute signal. */
 
 /*
  * Mutes all outputs if bMute=TRUE.
@@ -179,16 +179,16 @@ void ap192_Set_OutAttn (struct CardData *card, unsigned char bChan, int iAttn)
 {
     unsigned char bIndex;
     unsigned char bAttn;
-    if (bChan > 7 || iAttn > 0 || iAttn < -127)	/* parameter test */
+    if (bChan > 7 || iAttn > 0 || iAttn < -127)    /* parameter test */
     {
         //IOLog ("Dnvalid data! %d=bChan, %d=iAttn", bChan, iAttn);
         return;
     }
     if (bChan < 6)
-        bIndex = 0x04 + bChan;	/* for registers 0x04..0x09 */
+        bIndex = 0x04 + bChan;    /* for registers 0x04..0x09 */
     else
-        bIndex = 0x05 + bChan;	/* for registers 0x0B..0x0C */
-    bAttn = (0x80 + (unsigned char) (iAttn + 127));	/* 7F is max volume. */
+        bIndex = 0x05 + bChan;    /* for registers 0x0B..0x0C */
+    bAttn = (0x80 + (unsigned char) (iAttn + 127));    /* 7F is max volume. */
     /* MSB enables attenuation. */
     ap192_WriteSpiReg (card, ap192_AK4358, bIndex, bAttn);
 }
@@ -201,17 +201,16 @@ static void ap192_Set_48K_Mode (struct CardData *card)
 {
     IOPCIDevice *dev = card->pci_dev;
     /* ICE MCLK = 256x. */
-    dev->ioWrite8 (MT_I2S_FORMAT, dev->ioRead8(MT_I2S_FORMAT, card->mtbase) & ~BIT3,
-                   card->mtbase);
+    dev->ioWrite8 (MT_I2S_FORMAT, dev->ioRead8(MT_I2S_FORMAT, card->mtbase) & ~BIT3, card->mtbase);
     /* DFS=normal, RESET. */
     ap192_WriteSpiReg (card, ap192_AK4358, 2, 0x4E);
     /* DFS=normal, NORMAL OPERATION. */
     ap192_WriteSpiReg (card, ap192_AK4358, 2, 0x4F);
     
     /* Set ADC modes */
-    GPIOWrite (card, 8, 0);	/* CKS0 = 0. MCLK = 256x */
-    GPIOWrite (card, 9, 0);	/* DFS0 = 0. */
-    GPIOWrite (card, 10, 0);	/* DFS1 = 0. Single speed mode. */
+    GPIOWrite (card, 8, 0);    /* CKS0 = 0. MCLK = 256x */
+    GPIOWrite (card, 9, 0);    /* DFS0 = 0. */
+    GPIOWrite (card, 10, 0);    /* DFS1 = 0. Single speed mode. */
     
     /* Reset ADC timing */
     GPIOWrite (card, 11, 0);
@@ -227,17 +226,16 @@ static void ap192_Set_96K_Mode (struct CardData *card)
 {
     IOPCIDevice *devc = card->pci_dev;
     /* ICE MCLK = 256x. */
-    devc->ioWrite8 (MT_I2S_FORMAT, devc->ioRead8 (MT_I2S_FORMAT, card->mtbase) & ~BIT3,
-                    card->mtbase);
+    devc->ioWrite8 (MT_I2S_FORMAT, devc->ioRead8 (MT_I2S_FORMAT, card->mtbase) & ~BIT3, card->mtbase);
     /* DFS=double-speed, RESET. */
     ap192_WriteSpiReg (card, ap192_AK4358, 2, 0x5E);
     /* DFS=double-speed, NORMAL OPERATION. */
     ap192_WriteSpiReg (card, ap192_AK4358, 2, 0x5F);
     
     /* Set ADC modes */
-    GPIOWrite (card, 8, 0);	/* CKS0 = 0. MCLK = 256x */
-    GPIOWrite (card, 9, 1);	/* DFS0 = 0. */
-    GPIOWrite (card, 10, 0);	/* DFS1 = 0. Single speed mode. */
+    GPIOWrite (card, 8, 0);    /* CKS0 = 0. MCLK = 256x */
+    GPIOWrite (card, 9, 1);    /* DFS0 = 0. */
+    GPIOWrite (card, 10, 0);    /* DFS1 = 0. Single speed mode. */
     
     /* Reset ADC timing */
     GPIOWrite (card, 11, 0);
@@ -253,8 +251,7 @@ static void ap192_Set_192K_Mode (struct CardData *card)
 {
     IOPCIDevice *devc = card->pci_dev;
     /* ICE MCLK = 128x. */
-    devc->ioWrite8 (MT_I2S_FORMAT, devc->ioRead8 (MT_I2S_FORMAT, card->mtbase) | BIT3,
-                    card->mtbase);
+    devc->ioWrite8 (MT_I2S_FORMAT, devc->ioRead8 (MT_I2S_FORMAT, card->mtbase) | BIT3, card->mtbase);
     _delay ();
     /*----- SET THE D/A. */
     /* DFS=quad-speed, RESET. */
@@ -268,9 +265,9 @@ static void ap192_Set_192K_Mode (struct CardData *card)
     ap192_WriteSpiReg (card, ap192_AK4114, 0x00, 0x0f);
     
     /* Set ADC modes */
-    GPIOWrite (card, 8, 1);	/* CKS0 = 0. MCLK = 256x */
-    GPIOWrite (card, 9, 0);	/* DFS0 = 0. */
-    GPIOWrite (card, 10, 1);	/* DFS1 = 0. Single speed mode. */
+    GPIOWrite (card, 8, 1);    /* CKS0 = 0. MCLK = 256x */
+    GPIOWrite (card, 9, 0);    /* DFS0 = 0. */
+    GPIOWrite (card, 10, 1);    /* DFS1 = 0. Single speed mode. */
     
     /* Reset ADC timing */
     GPIOWrite (card, 11, 0);
@@ -330,17 +327,14 @@ static void ap192_set_rate (struct CardData *card, unsigned long speed)
     IOPCIDevice *devc = card->pci_dev;
     
     tmp = devc->ioRead8 (MT_I2S_FORMAT, card->mtbase);
-    if (speed <= 48000)
-    {
+    if (speed <= 48000) {
         ap192_Set_48K_Mode (card);
         devc->ioWrite8 (MT_I2S_FORMAT, tmp & ~BIT (3), card->mtbase);
         return;
     }
     
-    if (speed <= 96000)
-    {
+    if (speed <= 96000) {
         ap192_Set_96K_Mode (card);
-        
         return;
     }
     
@@ -353,8 +347,7 @@ static void ap192_audio_ioctl (struct CardData *card, int cmd, int *arg)
 #if 0
     int left, right, value;
     
-    switch (cmd)
-    {
+    switch (cmd) {
         case SNDCTL_DSP_GETPLAYVOL:
             if (portc != &devc->play_portc[0])
                 return OSS_EINVAL;
@@ -389,26 +382,22 @@ static void ap192_set_control (int dev, int ctrl, unsigned int cmd, int value)
     IOPCIDevice *devc = mixer_devs[dev]->hw_devc;
     
     if (cmd == SNDCTL_MIX_READ)
-        switch (ctrl)
-    {
-        case 0:
-            return devc->mute;
-            
-        default:
-            return OSS_EINVAL;
-    }
+        switch (ctrl) {
+            case 0:
+                return devc->mute;
+            default:
+                return OSS_EINVAL;
+        }
     
     if (cmd == SNDCTL_MIX_WRITE)
-        switch (ctrl)
-    {
-        case 0:
-            value = !!value;
-            ap192_Mute (devc, value);
-            return devc->mute;
-            
-        default:
-            return OSS_EINVAL;
-    }
+        switch (ctrl) {
+            case 0:
+                value = !!value;
+                ap192_Mute (devc, value);
+                return devc->mute;
+            default:
+                return OSS_EINVAL;
+        }
     
     return OSS_EINVAL;
 #endif
@@ -419,29 +408,26 @@ static int ap192_set_ak4358 (int dev, int ctrl, unsigned int cmd, int value)
 #if 0
     IOPCIDevice *devc = mixer_devs[dev]->hw_devc;
     
-    if (cmd == SNDCTL_MIX_READ)
-    {
+    if (cmd == SNDCTL_MIX_READ) {
         if (ctrl < 0 || ctrl > 4)
             return OSS_EIO;
         
         return devc->gains[ctrl];
     }
     
-    if (cmd == SNDCTL_MIX_WRITE)
-    {
+    if (cmd == SNDCTL_MIX_WRITE) {
         int left, right;
         
         left = value & 0xff;
         right = (value >> 8) & 0xff;
         
-        switch (ctrl)
-        {
-            case 0:		/* PCM */
+        switch (ctrl) {
+            case 0:        /* PCM */
                 left = set_dac (card, 0x04, left);
                 right = set_dac (card, 0x05, right);
                 break;
                 
-            case 1:		/* Line IN */
+            case 1:        /* Line IN */
                 /* Line IN monitor permits panning but we don't support it */
                 left = set_dac (card, 0x06, left);
                 set_dac (card, 0x07, 0);
@@ -449,7 +435,7 @@ static int ap192_set_ak4358 (int dev, int ctrl, unsigned int cmd, int value)
                 right = set_dac (card, 0x09, right);
                 break;
                 
-            case 2:		/* S/PDIF */
+            case 2:        /* S/PDIF */
                 left = set_dac (card, 0x0b, left);
                 left = set_dac (card, 0x0c, right);
                 break;
@@ -515,9 +501,9 @@ void ap192_card_init (struct CardData *card)
     // int i;
     
 #if 0
-    OUTB (devc->osdev, 0xff, devc->ccs_base + 0x1a);	/* GPIO direction for bits 16:22 */
-    OUTB (devc->osdev, 0x00, devc->ccs_base + 0x1f);	/* GPIO mask for bits 16:22 */
-    OUTB (devc->osdev, 0xff, devc->ccs_base + 0x1e);	/* GPIO data for bits 16:22 */
+    OUTB (devc->osdev, 0xff, devc->ccs_base + 0x1a);    /* GPIO direction for bits 16:22 */
+    OUTB (devc->osdev, 0x00, devc->ccs_base + 0x1f);    /* GPIO mask for bits 16:22 */
+    OUTB (devc->osdev, 0xff, devc->ccs_base + 0x1e);    /* GPIO data for bits 16:22 */
 #endif
     
     AK4358_Init (card);
@@ -528,7 +514,7 @@ void ap192_card_init (struct CardData *card)
     
     ap192_Mute (card, 0);
     
-    GPIOWrite (card, 5, 0);	/* Select S/PDIF output mux */
-    GPIOWrite (card, 5, 0);	/* Select S/PDIF output mux */
+    GPIOWrite (card, 5, 0);    /* Select S/PDIF output mux */
+    GPIOWrite (card, 5, 0);    /* Select S/PDIF output mux */
     
 }

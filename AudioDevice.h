@@ -23,18 +23,18 @@ class Envy24HTAudioDevice : public IOAudioDevice
     
     OSDeclareDefaultStructors(Envy24HTAudioDevice)
     
-	struct CardData *card;
+    struct CardData *card;
     
-    virtual bool	initHardware(IOService *provider);
-    virtual bool	createAudioEngine();
-    virtual void	free();
-	virtual IOReturn performPowerStateChange(IOAudioDevicePowerState oldPowerState,
-											 IOAudioDevicePowerState newPowerState,
-											 UInt32 *microsecondsUntilComplete);
-	
-	void dumpRegisters();
+    virtual bool    initHardware(IOService *provider);
+    virtual bool    createAudioEngine();
+    virtual void    free();
+    virtual IOReturn performPowerStateChange(IOAudioDevicePowerState oldPowerState,
+                                             IOAudioDevicePowerState newPowerState,
+                                             UInt32 *microsecondsUntilComplete);
     
-	static IOReturn volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
+    void dumpRegisters();
+    
+    static IOReturn volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
     
     static IOReturn outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue);

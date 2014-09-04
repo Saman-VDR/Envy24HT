@@ -4,8 +4,8 @@
 
 #define SUBVENDOR_AUREON_SKY    0x3b154711
 #define SUBVENDOR_AUREON_SPACE  0x3b154511
-#define SUBVENDOR_PHASE28	    0x3b154911
-#define SUBVENDOR_PHASE22	    0x3b155011
+#define SUBVENDOR_PHASE28       0x3b154911
+#define SUBVENDOR_PHASE22       0x3b155011
 #define SUBVENDOR_FAME22        0x3b157B11
 #define SUBVENDOR_PRODIGY71     0x33495345
 
@@ -259,9 +259,9 @@
 #define AUREON_WM_CS            (1 << 12)
 #define AUREON_AC97_COMMIT      (1 << 11)
 #define AUREON_AC97_ADDR        (1 << 10)
-#define AUREON_AC97_DATA_LOW	(1 << 9)
-#define AUREON_AC97_DATA_HIGH	(1 << 8)
-#define AUREON_AC97_DATA_MASK	0xFF
+#define AUREON_AC97_DATA_LOW    (1 << 9)
+#define AUREON_AC97_DATA_HIGH   (1 << 8)
+#define AUREON_AC97_DATA_MASK   0xFF
 
 
 #define PHASE28_FREQ0           (1 << 22) // input
@@ -271,50 +271,50 @@
 #define PHASE28_SPI_MOSI        (1 << 18)
 #define PHASE28_WM_RW           (1 << 17)
 #define PHASE28_FREQ2           (1 << 16)
-#define PHASE28_DIGITAL_SEL1	(1 << 15)
+#define PHASE28_DIGITAL_SEL1    (1 << 15)
 #define PHASE28_HP_SEL          (1 << 14)
 #define PHASE28_WM_CS           (1 << 12)
 #define PHASE28_AC97_COMMIT     (1 << 11)
 #define PHASE28_AC97_ADDR       (1 << 10)
-#define PHASE28_AC97_DATA_LOW	(1 << 9)
-#define PHASE28_AC97_DATA_HIGH	(1 << 8)
-#define PHASE28_AC97_DATA_MASK	0xFF
+#define PHASE28_AC97_DATA_LOW   (1 << 9)
+#define PHASE28_AC97_DATA_HIGH  (1 << 8)
+#define PHASE28_AC97_DATA_MASK  0xFF
 
 
-#define REVO_CCLK	    0x02	// control data input pin on AKM (pin 7 on 4381)
-#define REVO_CDIN	    0x04	// not used
-#define REVO_CDOUT	    0x08
-#define REVO_CS0		0x10	// not used
-#define REVO_CS1		0x20	// front AKM4381 chipselect
-#define REVO_CS2		0x40	// surround AKM4355 chipselect
-#define REVO_MUTE       (1<<22)	// 0 = all mute, 1 = normal operation
-#define VT1724_REVO_CS3	0x80	// AK4114 for AP192
+#define REVO_CCLK        0x02    // control data input pin on AKM (pin 7 on 4381)
+#define REVO_CDIN        0x04    // not used
+#define REVO_CDOUT       0x08
+#define REVO_CS0         0x10    // not used
+#define REVO_CS1         0x20    // front AKM4381 chipselect
+#define REVO_CS2         0x40    // surround AKM4355 chipselect
+#define REVO_MUTE        (1<<22) // 0 = all mute, 1 = normal operation
+#define VT1724_REVO_CS3  0x80    // AK4114 for AP192
 
 
 // ESI JULI@
-#define AK4114_ADDR		0x20	// S/PDIF receiver
-#define AK4358_ADDR		0x22	// DAC
+#define AK4114_ADDR        0x20    // S/PDIF receiver
+#define AK4358_ADDR        0x22    // DAC
 
-#define GPIO_FREQ_MASK		(3<<0)
-#define GPIO_FREQ_32KHZ		(0<<0)
-#define GPIO_FREQ_44KHZ		(1<<0)
-#define GPIO_FREQ_48KHZ		(2<<0)
-#define GPIO_MULTI_MASK		(3<<2)
-#define GPIO_MULTI_4X		(0<<2)
-#define GPIO_MULTI_2X		(1<<2)
-#define GPIO_MULTI_1X		(2<<2)      // also external
-#define GPIO_MULTI_HALF		(3<<2)
-#define GPIO_INTERNAL_CLOCK	(1<<4)
-#define GPIO_ANALOG_PRESENT	(1<<5)      // RO only: 0 = present
-#define GPIO_RXMCLK_SEL		(1<<7)      // must be 0
-#define GPIO_AK5385A_CKS0	(1<<8)      // master clock select
-#define GPIO_AK5385A_DFS0	(1<<9)      // swapped with DFS1 according doc?
-#define GPIO_AK5385A_DFS1	(1<<10)     // dfs0 + dfs1 = sampling rate select
-#define GPIO_DIGOUT_MONITOR	(1<<11)     // 1 = active
-#define GPIO_DIGIN_MONITOR	(1<<12)     // 1 = active
-#define GPIO_ANAIN_MONITOR	(1<<13)     // 1 = active
-#define GPIO_AK5385A_MCLK	(1<<14)     // must be 0
-#define GPIO_MUTE_CONTROL	(1<<15)     // 0 = off, 1 = on
+#define GPIO_FREQ_MASK       (3<<0)
+#define GPIO_FREQ_32KHZ      (0<<0)
+#define GPIO_FREQ_44KHZ      (1<<0)
+#define GPIO_FREQ_48KHZ      (2<<0)
+#define GPIO_MULTI_MASK      (3<<2)
+#define GPIO_MULTI_4X        (0<<2)
+#define GPIO_MULTI_2X        (1<<2)
+#define GPIO_MULTI_1X        (2<<2)      // also external
+#define GPIO_MULTI_HALF      (3<<2)
+#define GPIO_INTERNAL_CLOCK  (1<<4)
+#define GPIO_ANALOG_PRESENT  (1<<5)      // RO only: 0 = present
+#define GPIO_RXMCLK_SEL      (1<<7)      // must be 0
+#define GPIO_AK5385A_CKS0    (1<<8)      // master clock select
+#define GPIO_AK5385A_DFS0    (1<<9)      // swapped with DFS1 according doc?
+#define GPIO_AK5385A_DFS1    (1<<10)     // dfs0 + dfs1 = sampling rate select
+#define GPIO_DIGOUT_MONITOR  (1<<11)     // 1 = active
+#define GPIO_DIGIN_MONITOR   (1<<12)     // 1 = active
+#define GPIO_ANAIN_MONITOR   (1<<13)     // 1 = active
+#define GPIO_AK5385A_MCLK    (1<<14)     // must be 0
+#define GPIO_MUTE_CONTROL    (1<<15)     // 0 = off, 1 = on
 
 
 #endif /* _REGS_H */

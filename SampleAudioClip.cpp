@@ -14,19 +14,19 @@
 // format
 
 // The parameters are as follows:
-//		mixBuf - a pointer to the beginning of the float mix buffer - its size is based on the number of sample frames
-// 					times the number of channels for the stream
-//		sampleBuf - a pointer to the beginning of the hardware formatted sample buffer - this is the same buffer passed
-//					to the IOAudioStream using setSampleBuffer()
-//		firstSampleFrame - this is the index of the first sample frame to perform the clipping and conversion on
-//		numSampleFrames - the total number of sample frames to clip and convert
-//		streamFormat - the current format of the IOAudioStream this function is operating on
-//		audioStream - the audio stream this function is operating on
+//        mixBuf - a pointer to the beginning of the float mix buffer - its size is based on the number of sample frames
+//                     times the number of channels for the stream
+//        sampleBuf - a pointer to the beginning of the hardware formatted sample buffer - this is the same buffer passed
+//                    to the IOAudioStream using setSampleBuffer()
+//        firstSampleFrame - this is the index of the first sample frame to perform the clipping and conversion on
+//        numSampleFrames - the total number of sample frames to clip and convert
+//        streamFormat - the current format of the IOAudioStream this function is operating on
+//        audioStream - the audio stream this function is operating on
 IOReturn Envy24HTAudioEngine::clipOutputSamples(const void *mixBuf, void *sampleBuf, UInt32 firstSampleFrame, UInt32 numSampleFrames, const IOAudioStreamFormat *streamFormat, IOAudioStream *audioStream)
 {
     UInt32 sampleIndex, maxSampleIndex, spdifIndex;
     float *floatMixBuf;
-	float inSample;
+    float inSample;
     SInt32 *outputSInt32Buf = (SInt32 *)sampleBuf;
     // Start by casting the void * mix and sample buffers to the appropriate types - float * for the mix buffer
     // and SInt32 * for the sample buffer (because our sample hardware uses signed 32-bit samples)
@@ -45,35 +45,35 @@ IOReturn Envy24HTAudioEngine::clipOutputSamples(const void *mixBuf, void *sample
         // Clip that sample to a range of -1.0 to 1.0
         // A softer clipping operation could be done here
         if (inSample > 1.0)
-		{
+        {
             inSample = 1.0;
         }
-		else if (inSample < -1.0)
-		{
+        else if (inSample < -1.0)
+        {
             inSample = -1.0;
         }
         
         // Scale the -1.0 to 1.0 range to the appropriate scale for signed 32-bit samples and then
         // convert to SInt32 and store in the hardware sample buffer
-		if (inSample >= 0)
-		{
-			outputSInt32Buf[sampleIndex] = (SInt32) (inSample * INT_MAX);
-		}
-		else
-		{
-			outputSInt32Buf[sampleIndex] = (SInt32) (inSample * INT_MIN);
-		}
+        if (inSample >= 0)
+        {
+            outputSInt32Buf[sampleIndex] = (SInt32) (inSample * INT_MAX);
+        }
+        else
+        {
+            outputSInt32Buf[sampleIndex] = (SInt32) (inSample * INT_MIN);
+        }
     }
-	
-	// Fill SPDIF buffer with first stereo pair mixed sound
-	UInt32 skip = (streamFormat->fNumChannels - 2) + 1;
-	spdifIndex = firstSampleFrame * 2;
-	for (sampleIndex = (firstSampleFrame * streamFormat->fNumChannels); sampleIndex < maxSampleIndex; sampleIndex+=skip)
-	{
+    
+    // Fill SPDIF buffer with first stereo pair mixed sound
+    UInt32 skip = (streamFormat->fNumChannels - 2) + 1;
+    spdifIndex = firstSampleFrame * 2;
+    for (sampleIndex = (firstSampleFrame * streamFormat->fNumChannels); sampleIndex < maxSampleIndex; sampleIndex+=skip)
+    {
         outputBufferSPDIF[spdifIndex++] = outputSInt32Buf[sampleIndex++];
-		outputBufferSPDIF[spdifIndex++] = outputSInt32Buf[sampleIndex];
+        outputBufferSPDIF[spdifIndex++] = outputSInt32Buf[sampleIndex];
     }
-	
+    
     
     return kIOReturnSuccess;
 }
@@ -87,21 +87,21 @@ IOReturn Envy24HTAudioEngine::clipOutputSamples(const void *mixBuf, void *sample
 // This implementation is very inefficient, but illustrates the conversion and scaling that needs to take place.
 
 // The parameters are as follows:
-//		sampleBuf - a pointer to the beginning of the hardware formatted sample buffer - this is the same buffer passed
-//					to the IOAudioStream using setSampleBuffer()
-//		destBuf - a pointer to the float destination buffer - this is the buffer that the CoreAudio.framework uses
-//					its size is numSampleFrames * numChannels * sizeof(float)
-//		firstSampleFrame - this is the index of the first sample frame to the input conversion on
-//		numSampleFrames - the total number of sample frames to convert and scale
-//		streamFormat - the current format of the IOAudioStream this function is operating on
-//		audioStream - the audio stream this function is operating on
+//        sampleBuf - a pointer to the beginning of the hardware formatted sample buffer - this is the same buffer passed
+//                    to the IOAudioStream using setSampleBuffer()
+//        destBuf - a pointer to the float destination buffer - this is the buffer that the CoreAudio.framework uses
+//                    its size is numSampleFrames * numChannels * sizeof(float)
+//        firstSampleFrame - this is the index of the first sample frame to the input conversion on
+//        numSampleFrames - the total number of sample frames to convert and scale
+//        streamFormat - the current format of the IOAudioStream this function is operating on
+//        audioStream - the audio stream this function is operating on
 IOReturn Envy24HTAudioEngine::convertInputSamples(const void *sampleBuf, void *destBuf, UInt32 firstSampleFrame, UInt32 numSampleFrames, const IOAudioStreamFormat *streamFormat, IOAudioStream *audioStream)
 {
     UInt32 numSamplesLeft;
     float *floatDestBuf;
     SInt32 *inputBuf;
-	SInt32 inputSample;
-	UInt32 i;
+    SInt32 inputSample;
+    UInt32 i;
     
     // Start by casting the destination buffer to a float *
     floatDestBuf = (float *)destBuf;
@@ -111,8 +111,8 @@ IOReturn Envy24HTAudioEngine::convertInputSamples(const void *sampleBuf, void *d
     // Calculate the number of actual samples to convert
     numSamplesLeft = numSampleFrames * streamFormat->fNumChannels;
     
-	//IOLog("convert: %lu %lu %ld\n", numSampleFrames, numSamplesLeft, *inputBuf);
-	
+    //IOLog("convert: %lu %lu %ld\n", numSampleFrames, numSamplesLeft, *inputBuf);
+    
     // Loop through each sample and scale and convert them
     for (i = 0; i < numSamplesLeft; i++) {
         // Fetch the SInt32 input sample
